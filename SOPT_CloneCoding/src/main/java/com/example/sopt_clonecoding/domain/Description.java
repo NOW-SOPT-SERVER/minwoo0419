@@ -1,6 +1,7 @@
 package com.example.sopt_clonecoding.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,16 +11,20 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@Table(name="description")
+@NoArgsConstructor(access= AccessLevel.PROTECTED)
 public class Description {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name="member_id")
+    @JoinColumn(name="member_id", nullable=false)
     private Member member;
+    @Column(name="content", nullable=false)
     private String content;
+    @Column(name="created_at", nullable=false)
     private LocalDateTime createdAt;
+    @Column(name="updated_at", nullable=false)
     private LocalDateTime updatedAt;
     public static Description create(Member member, String content){
         return Description.builder()

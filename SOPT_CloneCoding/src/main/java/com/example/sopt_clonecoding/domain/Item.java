@@ -1,6 +1,7 @@
 package com.example.sopt_clonecoding.domain;
 
 import com.example.sopt_clonecoding.dto.ItemCreateDto;
+import com.example.sopt_clonecoding.dto.type.Tag;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -19,9 +20,12 @@ public class Item {
     private Long id;
     @Column(name="title", nullable=false)
     private String title;
-    @Column(name="tag", nullable = false)
-    
-    @Column(name="price")
+    @Enumerated(EnumType.STRING)
+    @Column(name="tag", nullable=false)
+    private Tag tag;
+    @Column(name="tag_content")
+    private String tagContent;
+    @Column(name="price", columnDefinition="integer default 0")
     private Integer price;
     @Column(name="content", nullable=false)
     private String content;
@@ -31,7 +35,9 @@ public class Item {
     private boolean canOffer;
     @Column(name="place")
     private String place;
+    @Column(name="created_at", nullable=false)
     private LocalDateTime createdAt;
+    @Column(name="updated_at", nullable=false)
     private LocalDateTime updatedAt;
     @ManyToOne(targetEntity=Member.class, fetch=FetchType.LAZY)
     @JoinColumn(name="member_id", nullable=false)
@@ -40,6 +46,8 @@ public class Item {
         return Item.builder()
                 .member(member)
                 .title(itemCreateDto.title())
+                .tag(itemCreateDto.tag())
+                .tagContent(itemCreateDto.tagContent())
                 .price(itemCreateDto.price())
                 .content(itemCreateDto.content())
                 .isSell(itemCreateDto.isSell())
@@ -49,9 +57,11 @@ public class Item {
     }
 
     @Builder
-    public Item(Member member, String title, Integer price, String content, boolean isSell, boolean canOffer, String place) {
+    public Item(Member member, String title, Tag tag, String tagContent, Integer price, String content, boolean isSell, boolean canOffer, String place) {
         this.member = member;
         this.title = title;
+        this.tag = tag;
+        this.tagContent = tagContent;
         this.price = price;
         this.content = content;
         this.isSell = isSell;
