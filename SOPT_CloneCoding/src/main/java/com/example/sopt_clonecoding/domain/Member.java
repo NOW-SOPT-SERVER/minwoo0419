@@ -21,9 +21,9 @@ public class Member {
     private String name;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade=CascadeType.ALL)
     private List<Description> descriptions = new ArrayList<>();
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade=CascadeType.ALL)
     private List<Item> items = new ArrayList<>();
     public static Member create(MemberCreateDto memberCreateDto){
         return Member.builder()
