@@ -29,7 +29,7 @@ public class PostController {
                 .body(SuccessStatusResponse.of(SuccessMessage.POST_CREATE_SUCCESS));
     }
 
-    @GetMapping("/post/list")
+    @GetMapping("/post")
     public ResponseEntity<PostListDto> findAllByBlogId(
             @RequestHeader Long blogId
     ){
