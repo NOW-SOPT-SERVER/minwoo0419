@@ -2,7 +2,9 @@ package org.sopt.practice.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.sopt.practice.common.dto.ErrorMessage;
 import org.sopt.practice.domain.Member;
+import org.sopt.practice.exception.NotFoundException;
 import org.sopt.practice.repository.MemberRepository;
 import org.sopt.practice.service.dto.MemberCreateDto;
 import org.sopt.practice.service.dto.MemberDto;
@@ -43,5 +45,10 @@ public class MemberService {
                 MemberDto::of
         ).toList();
         return MemberListDto.of(members);
+    }
+    public Member findById(Long memberId){
+        return memberRepository.findById(memberId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.MEMBER_NOT_FOUND)
+        );
     }
 }
