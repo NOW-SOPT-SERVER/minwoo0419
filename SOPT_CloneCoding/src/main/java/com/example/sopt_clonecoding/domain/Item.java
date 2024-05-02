@@ -1,6 +1,6 @@
 package com.example.sopt_clonecoding.domain;
 
-import com.example.sopt_clonecoding.dto.ItemCreateDto;
+import com.example.sopt_clonecoding.dto.item.request.ItemCreateDto;
 import com.example.sopt_clonecoding.dto.type.Tag;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -42,6 +44,8 @@ public class Item {
     @ManyToOne(targetEntity=Member.class, fetch=FetchType.LAZY)
     @JoinColumn(name="member_id", nullable=false)
     private Member member;
+    @OneToMany(mappedBy="item", cascade=CascadeType.ALL)
+    private final List<Like> likes = new ArrayList<>();
     public static Item create(Member member, ItemCreateDto itemCreateDto){
         return Item.builder()
                 .member(member)

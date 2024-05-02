@@ -1,6 +1,6 @@
 package com.example.sopt_clonecoding.domain;
 
-import com.example.sopt_clonecoding.dto.MemberCreateDto;
+import com.example.sopt_clonecoding.dto.member.request.MemberCreateDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -30,6 +30,8 @@ public class Member {
     private final List<Description> descriptions = new ArrayList<>();
     @OneToMany(mappedBy = "member", cascade=CascadeType.ALL)
     private final List<Item> items = new ArrayList<>();
+    @OneToMany(mappedBy="member", cascade=CascadeType.ALL)
+    private final List<Like> likes = new ArrayList<>();
     public static Member create(MemberCreateDto memberCreateDto){
         return Member.builder()
                 .name(memberCreateDto.name())
