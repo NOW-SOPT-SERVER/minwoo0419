@@ -24,7 +24,7 @@ public class BlogController {
         return ResponseEntity.status(HttpStatus.CREATED).header(
                 "Location",
                 blogService.create(memberId, blogCreateRequest))
-                .body(SuccessStatusResponse.of(SuccessMessage.VLOG_CREATE_SUCCESS));
+                .body(SuccessStatusResponse.of(SuccessMessage.VLOG_CREATE_SUCCESS, null));
     }
     @PatchMapping("/blog/{blogId}/title")
     public ResponseEntity updateBlogTitle(
