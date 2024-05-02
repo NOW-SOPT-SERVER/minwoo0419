@@ -1,4 +1,4 @@
-package com.example.sopt_clonecoding.dto;
+package com.example.sopt_clonecoding.dto.item.request;
 
 import com.example.sopt_clonecoding.dto.type.Tag;
 import jakarta.annotation.Nullable;
