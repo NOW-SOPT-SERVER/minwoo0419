@@ -20,16 +20,15 @@ public class ItemService {
     private final ItemRepository itemRepository;
     private final MemberService memberService;
     @Transactional
-    public Long createItem(Long memberId, ItemCreateDto itemCreateDto){
+    public void createItem(Long memberId, ItemCreateDto itemCreateDto){
         Member member = memberService.findMemberById(memberId);
         Item item = Item.create(member, itemCreateDto);
         itemRepository.save(item);
-        return item.getId();
     }
 
     public ItemListDto findAllByPlace(String place){
         List<ItemDto> items = itemRepository.findAllByPlace(place).stream().map(
-                item -> ItemDto.of(item, item.getLikes().stream().count())
+                item -> ItemDto.of(item, item.getLikes().size())
         ).toList();
         return ItemListDto.of(items);
     }

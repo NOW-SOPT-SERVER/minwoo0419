@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class ItemController {
     private final ItemService itemService;
     @PostMapping("/items")
-    public ApiResponse<Long> postItem(
+    public ApiResponse<Void> postItem(
             @RequestHeader Long memberId,
             @RequestBody ItemCreateDto itemCreateDto
     ){
-        return ApiResponse.created(itemService.createItem(memberId, itemCreateDto));
+        itemService.createItem(memberId, itemCreateDto);
+        return ApiResponse.created(null);
     }
     @GetMapping("/items")
     public ApiResponse<ItemListDto> findAllByPlace(

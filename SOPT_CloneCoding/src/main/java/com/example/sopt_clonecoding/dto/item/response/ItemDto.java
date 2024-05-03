@@ -1,7 +1,6 @@
 package com.example.sopt_clonecoding.dto.item.response;
 
 import com.example.sopt_clonecoding.domain.Item;
-
 import java.time.LocalDateTime;
 
 public record ItemDto(
@@ -9,9 +8,9 @@ public record ItemDto(
         String title,
         Integer price,
         LocalDateTime createdAt,
-        Long likeCount
+        Integer likeCount
 ) {
-    public static ItemDto of(Item item, Long likeCount){
+    public static ItemDto of(Item item, Integer likeCount){
         return new ItemDto(item.getId(), item.getTitle(), item.getPrice(), item.getCreatedAt(), likeCount);
     }
 }

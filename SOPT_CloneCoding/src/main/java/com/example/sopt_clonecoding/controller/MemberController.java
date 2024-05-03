@@ -16,9 +16,10 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping
-    public ApiResponse<Long> postMember(
+    public ApiResponse<Void> postMember(
             @RequestBody MemberCreateDto memberCreateDto
     ){
-        return ApiResponse.created(memberService.createMember(memberCreateDto));
+        memberService.createMember(memberCreateDto);
+        return ApiResponse.created(null);
     }
 }
