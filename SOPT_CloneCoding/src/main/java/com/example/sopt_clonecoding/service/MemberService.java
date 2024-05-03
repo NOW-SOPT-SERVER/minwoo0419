@@ -18,9 +18,8 @@ public class MemberService {
                 () -> new CustomException(ErrorCode.NOT_FOUND_MEMBER));
     }
     @Transactional
-    public Long createMember(MemberCreateDto memberCreateDto){
+    public void createMember(MemberCreateDto memberCreateDto){
         Member member = Member.create(memberCreateDto);
         memberRepository.save(member);
-        return member.getId();
     }
 }

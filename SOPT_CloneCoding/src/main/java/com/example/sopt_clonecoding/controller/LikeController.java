@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/items/{itemId}")
 public class LikeController {
     private final LikeService likeService;
     @PostMapping("/likes")
     public ApiResponse<Void> postLike(
             @RequestHeader Long memberId,
-            @RequestHeader Long itemId
+            @PathVariable Long itemId
     ){
         likeService.createLike(memberId, itemId);
         return ApiResponse.created(null);
@@ -22,7 +22,7 @@ public class LikeController {
     @DeleteMapping("/likes")
     public ApiResponse<Void> deleteLike(
             @RequestHeader Long memberId,
-            @RequestHeader Long itemId
+            @PathVariable Long itemId
     ){
         likeService.deleteLike(memberId, itemId);
         return ApiResponse.ok(null);
