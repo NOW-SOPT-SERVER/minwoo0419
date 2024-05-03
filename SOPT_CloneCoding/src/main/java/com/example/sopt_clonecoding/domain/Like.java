@@ -29,7 +29,6 @@ public class Like {
         return new Like(member, item);
     }
 
-    @Builder
     public Like(Member member, Item item) {
         this.createdAt = LocalDateTime.now();
         this.member = member;
