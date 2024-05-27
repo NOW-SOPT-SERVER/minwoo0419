@@ -10,6 +10,7 @@ import org.sopt.practice.exception.NotFoundException;
 import org.sopt.practice.repository.TokenRepository;
 import org.sopt.practice.service.dto.UserJoinResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +18,7 @@ public class TokenService {
     private final TokenRepository tokenRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
+    @Transactional
     public Token save(
             final Long memberId,
             final String refreshToken
@@ -25,6 +27,8 @@ public class TokenService {
         tokenRepository.save(token);
         return token;
     }
+
+    @Transactional
     public UserJoinResponse createTokens(final Long memberId){
         String accessToken = jwtTokenProvider.issueAccessToken(
                 UserAuthentication.createUserAuthentication(memberId)
