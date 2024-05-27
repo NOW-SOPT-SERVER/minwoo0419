@@ -3,6 +3,7 @@ package org.sopt.practice.common;
 import org.sopt.practice.common.dto.ErrorResponse;
 import org.sopt.practice.exception.CustomAccessDeniedException;
 import org.sopt.practice.exception.NotFoundException;
+import org.sopt.practice.exception.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -24,5 +25,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CustomAccessDeniedException.class)
     protected ResponseEntity<ErrorResponse> handleAccessDeniedException(CustomAccessDeniedException e){
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponse.of(e.getErrorMessage()));
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    protected ResponseEntity<ErrorResponse> handlerUnauthorizedException(UnauthorizedException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(ErrorResponse.of(e.getErrorMessage().getStatus(), e.getErrorMessage().getMessage()));
     }
 }

@@ -6,7 +6,6 @@ import org.sopt.practice.common.dto.ErrorMessage;
 import org.sopt.practice.domain.Member;
 import org.sopt.practice.exception.NotFoundException;
 import org.sopt.practice.repository.MemberRepository;
-import org.sopt.practice.service.dto.MemberCreateDto;
 import org.sopt.practice.service.dto.MemberDto;
 import org.sopt.practice.service.dto.MemberFindDto;
 import org.sopt.practice.service.dto.MemberListDto;
@@ -19,11 +18,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+
     @Transactional
-    public String createMember(MemberCreateDto memberCreateDto){
-        Member member = Member.create(memberCreateDto.name(), memberCreateDto.part(), memberCreateDto.age());
-        memberRepository.save(member);
-        return member.getId().toString();
+    public Long save(Member member){
+        return memberRepository.save(member).getId();
     }
     @Transactional(readOnly = true)
     public MemberFindDto findMemberById(Long memberId){
