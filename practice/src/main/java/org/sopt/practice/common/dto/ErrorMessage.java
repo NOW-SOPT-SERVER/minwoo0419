@@ -11,6 +11,8 @@ public enum ErrorMessage {
     BLOG_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "ID에 해당하는 블로그가 존재하지 않습니다."),
     POST_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "ID에 해당하는 글이 존재하지 않습니다."),
     BLOG_FORBIDDEN(HttpStatus.FORBIDDEN.value(), "블로그에 대한 권한이 존재하지 않습니다."),
+    JWT_UNAUTHORIZED_EXCEPTION(HttpStatus.UNAUTHORIZED.value(), "사용자의 로그인 검증을 실패했습니다."),
+    TOKEN_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "토큰이 존재하지 않습니다."),
     ;
     private final int status;
     private final String message;
