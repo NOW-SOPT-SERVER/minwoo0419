@@ -14,8 +14,11 @@ public enum ErrorCode {
     // Custom Error
     NOT_FOUND_MEMBER(40401, HttpStatus.NOT_FOUND, "존재하지 않는 회원입니다."),
     NOT_FOUND_ITEM(40411, HttpStatus.NOT_FOUND, "존재하지 않는 물건입니다."),
-    NOT_FOUND_LIKE(40421, HttpStatus.NOT_FOUND, "좋아요가 존재하지 않습니다.");
+    NOT_FOUND_LIKE(40421, HttpStatus.NOT_FOUND, "좋아요가 존재하지 않습니다."),
+    FAILED_UPLOAD_IMAGE(40031, HttpStatus.BAD_REQUEST, "이미지 업로드에 실패했습니다."),
+    FAILED_DELETE_IMAGE(40032, HttpStatus.BAD_REQUEST, "이미지 삭제에 실패했습니다."),
 
+    ;
     private final Integer code;
     private final HttpStatus httpStatus;
     private final String message;

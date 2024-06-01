@@ -27,5 +27,12 @@ public class ItemController {
     ){
         return ApiResponse.ok(itemService.findAllByPlace(place));
     }
+    @DeleteMapping("/items/{itemId}")
+    public ApiResponse<Void> deleteItem(
+            @PathVariable Long itemId
+    ){
+        itemService.deleteItem(itemId);
+        return ApiResponse.ok(null);
+    }
 
 }
